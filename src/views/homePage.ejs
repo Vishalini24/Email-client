@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+
+<div class="filter">
+    Filter By: &nbsp; Unread &nbsp; Read &nbsp; Favourites &nbsp; <a href="#" class="clear">Clear</a>
+</div>
+
+<!-- Shows all mails in separate cards -->
+<div class="container">
+    <% allMails.forEach((mail) =>{ %>
+        <a class="link" href="/emails/mailDetails/<%= mail._id %>" data-index="<%=mail._id%>">
+            <div class="card" data-is-read="<%= mail.isRead %>">
+                <div class="card_content">
+                    <div class="logo skeleton"><%=mail.sender.charAt(0).toUpperCase() %></div>
+                    <div id="details">
+                        <p class="from  skeleton skeleton-text">From: <b><%=mail.sender%></b></p>
+                        <p class="subject skeleton skeleton-text">Subject: <b><%=mail.subject%> </b></p> 
+                        <% const firstStopIndex = mail.content.indexOf('.'); %>
+                        <% const firstLine = firstStopIndex !== -1 ? mail.content.substring(0, firstStopIndex + 1) : mail.content; %>
+                        <p class="firstline skeleton skeleton-text"><%= firstLine %></p>
+                        <p class="date skeleton skeleton-text"><%=mail.createdAt%></p>
+                        <p class="favorite skeleton skeleton-text"><%= mail.isFavourite ? "Favourite" : "" %></p>
+                    </div>
+                </div>
+            </div>
+        </a>
+    <% }) %>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        const mailCards = document.querySelectorAll('.card');
+    
+        mailCards.forEach(card => {
+
+            card.addEventListener('click', async function () {
+
+                // Get mail ID from the data-index attribute
+                const mailId = this.parentElement.getAttribute('data-index');
+    
+                // Get the isRead value from the data-is-read attribute
+                const isRead = this.parentElement.getAttribute('data-is-read') === 'true';
+    
+                if (!isRead) {
+                    // Send an AJAX request to update the read status
+                    try {
+                        const response = await fetch(`/emails/markRead/${mailId}`, { method: 'POST' });
+                        const data = await response.json();
+    
+                        // Update the data-is-read true
+                        if (data.success) {
+                            this.parentElement.setAttribute('data-is-read', 'true');
+                        } else {
+                            console.error('Failed to update read status.');
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                    }
+                }
+            });
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,166 @@
+body{
+    background-color: #f4f5f9;
+    font-family: sans-serif;
+}
+
+/* Filters */
+.filter{
+    margin-top: 36px;
+    margin-left: 25px;
+    font-size: 13px;
+}
+
+.filter-link{
+    text-decoration: none;
+    color: black;
+}
+
+.filter-link:hover{
+    color:#ef3a63;
+}
+
+
+.clear{
+    text-decoration: none;
+}
+
+/* container which has list of mails and mail content */
+.container{
+    height: 100vh;
+    display: flex;
+    margin: 25px;
+    box-sizing: border-box;    
+}
+
+/* mail contains the list of mails */
+.mail{
+    height:60% ;
+    width: 70%;
+} 
+
+.card{
+    background-color: #ffffff;
+    height: 35%;
+    width: 97%;
+    color: gray;
+    font-size: 11px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    box-shadow: 0 0 2px grey;
+    margin-top: 10px;
+}
+
+.card_content{
+    display: flex;
+}
+
+#logo{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin: 10px;
+    background:#ef3a63;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.logo_fav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.date, .fav{
+    display: inline;
+    padding: 3px;
+}
+
+.fav{
+    color: #ed5a7c;
+    font-weight: bolder;
+}
+
+/* main contains the main-content of the mail */
+.main{
+    height: 80%;
+    width: 90%;
+    margin: 10px;
+    font-size: 12px;
+    color: gray;
+    padding: 10px;
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 5px grey;
+}
+
+.main-subject-date{
+    margin-right:230px;
+}
+
+.main-subject{
+    font-size: 20px;
+}
+
+
+.favorite-button{
+   height: 20px;
+   width: 120px;
+   font-size: 10px;
+   color: white;
+   margin-right: 20px;
+   background-color: #ef3a63;
+   border-radius: 10px;
+   border: none; 
+}
+
+#main-details{
+    margin-left: 40px;
+    margin-right: 40px;
+} 
+
+/* to highlight the mail whose main content is displayed */
+
+.highlight{
+    border: 2px solid #ef3a63;
+}
+
+
+/* Media query for small screens */
+@media screen and (max-width: 576px) {
+    .mail {
+        display: none;
+    }
+
+    .main {
+        height: 90%; 
+        font-size: 10px;
+    }
+
+    #logo {
+        display:none;
+    }
+    .main-subject-date{
+        margin-left:40px;
+    }
+    .favorite-button{
+       height: 30px;
+       width: 100px;
+       margin-left: -20px;
+    }
+}
+
+/* Media query for medium screens */
+@media screen and (min-width: 577px) and (max-width: 768px) {
+    .mail {
+        display: none;
+    }
+
+    .main {
+        height: 80%;
+    }
+}
+
